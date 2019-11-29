@@ -1,5 +1,4 @@
 #import <Flutter/Flutter.h>
-#import <MobileVLCKit/MobileVLCKit.h>
 
 @interface FlutterVlcPlayerPlugin : NSObject<FlutterPlugin>
 @end

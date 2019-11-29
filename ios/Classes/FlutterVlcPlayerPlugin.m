@@ -5,6 +5,7 @@
 //  Created by Vladimir Beloded on 12/26/18.
 //
 
+#import <MobileVLCKit/MobileVLCKit.h>
 #import "FlutterVlcPlayerPlugin.h"
 #import "VLCMediaPlayer.h"
 

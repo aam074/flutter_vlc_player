@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'dart:typed_data';
 import 'package:cryptoutils/cryptoutils.dart';
 import 'package:flutter/services.dart';
@@ -27,9 +27,7 @@ class VlcPlayerController {
   }
 
   void dispose() {
-    if (Platform.isIOS){
-      _channel.invokeMethod("dispose");
-    }
+    _channel.invokeMethod("dispose");
   }
 
 }
