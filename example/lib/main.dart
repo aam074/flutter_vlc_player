@@ -1,8 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_vlc_player/vlc_player.dart';
-import 'package:flutter_vlc_player/vlc_player_controller.dart';
+import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +19,16 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     imageKey = new GlobalKey();
-    _videoViewController = new VlcPlayerController();
+
+    _videoViewController = new VlcPlayerController(
+      onInit: (){
+        _videoViewController.play();
+      }
+    );
+    _videoViewController.addListener((){
+      setState(() {});
+    });
+
     super.initState();
   }
 
@@ -38,9 +46,8 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: <Widget>[
             new VlcPlayer(
-              defaultWidth: 640,
-              defaultHeight: 360,
-              url: "http://213.226.254.135:91/mjpg/video.mjpg",
+              aspectRatio: 16 / 9,
+              url: "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4",
               controller: _videoViewController,
               placeholder: Container(
                 height: 250.0,
@@ -50,6 +57,32 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
+
+            FlatButton(
+              child: Text("Change URL"),
+              onPressed: () => _videoViewController.setStreamUrl("http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_2160p_60fps_normal.mp4"),
+            ),
+
+            FlatButton(
+              child: Text("+speed"),
+              onPressed: () => _videoViewController.setPlaybackSpeed(2.0)
+            ),
+
+            FlatButton(
+                child: Text("Normal"),
+                onPressed: () => _videoViewController.setPlaybackSpeed(1)
+            ),
+
+            FlatButton(
+              child: Text("-speed"),
+              onPressed: () => _videoViewController.setPlaybackSpeed(0.5)
+            ),
+
+            Text("position=" + _videoViewController.position.inSeconds.toString() + ", duration=" + _videoViewController.duration.inSeconds.toString() + ", speed=" + _videoViewController.playbackSpeed.toString()),
+            Text("ratio=" + _videoViewController.aspectRatio.toString()),
+            Text("size=" + _videoViewController.size.width.toString() + "x" + _videoViewController.size.height.toString()),
+            Text("state=" + _videoViewController.playingState.toString()),
+
             Expanded(
               child: image == null
                   ? Container()
