@@ -26,7 +26,7 @@ import java.util.Map;
 class FlutterVideoView implements PlatformView, MethodChannel.MethodCallHandler, MediaPlayer.EventListener {
 
     // Silences player log output.
-    private static final boolean DISABLE_LOG_OUTPUT = true;
+    private static final boolean DISABLE_LOG_OUTPUT = false;
 
     final PluginRegistry.Registrar registrar;
     private final MethodChannel methodChannel;
