@@ -144,6 +144,7 @@ class FlutterVideoView implements PlatformView, MethodChannel.MethodCallHandler,
                 options.add("--no-drop-late-frames");
                 options.add("--no-skip-frames");
                 options.add("--rtsp-tcp");
+                options.add("-vvv");
 
                 if(DISABLE_LOG_OUTPUT) {
                     // Silence player log output.
