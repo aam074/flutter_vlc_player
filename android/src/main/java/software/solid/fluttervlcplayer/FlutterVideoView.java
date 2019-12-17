@@ -144,6 +144,7 @@ class FlutterVideoView implements PlatformView, MethodChannel.MethodCallHandler,
                 options.add("--no-drop-late-frames");
                 options.add("--no-skip-frames");
                 options.add("--rtsp-tcp");
+                options.add("--file-caching=2000");
                 options.add("-vvv");
 
                 if(DISABLE_LOG_OUTPUT) {
@@ -163,6 +164,10 @@ class FlutterVideoView implements PlatformView, MethodChannel.MethodCallHandler,
 
                 String initStreamURL = methodCall.argument("url");
                 Media media = new Media(libVLC, Uri.parse(Uri.decode(initStreamURL)));
+                media.setHWDecoderEnabled(true, false);
+                media.addOption(":network-caching=150");
+                media.addOption(":clock-jitter=0");
+                media.addOption(":clock-synchro=0");
                 mediaPlayer.setMedia(media);
 
                 result.success(null);
